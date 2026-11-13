@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="es-CO" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bon Yurt Velitas Alpina | El Nuevo Sabor de la Navidad</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Montserrat & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            alpina: {
+              dark: '#001B3A',
+              blue: '#003B73',
+              light: '#0066CC',
+            },
+            navidad: {
+              red: '#C8102E',
+              crimson: '#9B0B22',
+              gold: '#F59E0B',
+              spark: '#FCD34D',
+              cream: '#FFFBEB',
+            }
+          },
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            sans: ['Poppins', 'sans-serif'],
+          },
+          boxShadow: {
+            'glow-gold': '0 0 25px rgba(245, 158, 11, 0.45)',
+            'glow-red': '0 0 25px rgba(200, 16, 46, 0.4)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Estilos personalizados para glassmorphism, llamas de velitas y animaciones 3D */
+    body {
+      background: radial-gradient(circle at 50% 0%, #002D5A 0%, #00152E 55%, #070B19 100%);
+      color: #FFFBEB;
+      overflow-x: hidden;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(252, 211, 77, 0.22);
+    }
+
+    .glass-card-strong {
+      background: rgba(0, 27, 58, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(252, 211, 77, 0.3);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFFBEB 0%, #FCD34D 45%, #F59E0B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Animación de llama de velita */
+    @keyframes flicker {
+      0%, 100% { transform: scale(1) rotate(-1deg); opacity: 0.95; }
+      25% { transform: scale(1.06, 0.96) rotate(2deg); opacity: 1; }
+      50% { transform: scale(0.95, 1.05) rotate(-2deg); opacity: 0.88; }
+      75% { transform: scale(1.04, 0.98) rotate(1deg); opacity: 0.98; }
+    }
+
+    .candle-flame {
+      transform-origin: 50% 90%;
+      animation: flicker 1.6s infinite ease-in-out;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(1.5deg); }
+    }
+
+    .float-product {
+      animation: floatSlow 4.5s infinite ease-in-out;
+    }
+
+    /* Efecto de brillo sutil en botones */
+    .btn-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shine::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+      transform: rotate(25deg);
+      transition: all 0.6s ease;
+    }
+    .btn-shine:hover::after {
+      left: 130%;
+    }
+
+    /* Perspectiva 3D para tarjeta del producto */
+    .perspective-container {
+      perspective: 1000px;
+    }
+    .tilt-card {
+      transition: transform 0.18s ease-out;
+      transform-style: preserve-3d;
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-navidad-gold selection:text-alpina-dark">
+
+  <!-- Lienzo de fondo para partículas de chispas doradas y luces de velitas -->
+  <canvas id="bg-particles" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <!-- ==================== 1. HEADER / NAVEGACIÓN ==================== -->
+  <header class="sticky top-0 z-40 glass-card-strong border-b border-amber-300/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-3">
+      <!-- Logo Estilizado ALPINA | Bon Yurt Velitas -->
+      <a href="#inicio" class="flex items-center gap-3 group">
+        <div class="bg-white text-alpina-blue font-display font-black text-xl sm:text-2xl px-3.5 py-1.5 rounded-xl shadow-md tracking-tight group-hover:scale-105 transition">
+          Alpina
+        </div>
+        <div class="h-7 w-[1.5px] bg-amber-300/40 hidden sm:block"></div>
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-sm sm:text-base text-amber-300 tracking-wide uppercase leading-none">
+            Bon Yurt
+          </span>
+          <span class="text-xs font-medium text-rose-300 tracking-wider">
+            Edición Velitas ✨
+          </span>
+        </div>
+      </a>
+
+      <!-- Enlaces de Navegación (Desktop) -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-amber-50/90">
+        <a href="#experiencia" class="hover:text-amber-300 transition">Mezcla y Chispea</a>
+        <a href="#innovacion" class="hover:text-amber-300 transition">¿Qué lo hace único?</a>
+        <a href="#velitas" class="hover:text-amber-300 transition">Muro de Velitas</a>
+        <a href="#comprar" class="hover:text-amber-300 transition">Dónde Comprar</a>
+      </nav>
+
+      <!-- Controles de Audio y CTA -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <button
+          id="sound-toggle-btn"
+          type="button"
+          aria-label="Activar o desactivar efectos de sonido"
+          class="p-2.5 rounded-xl glass-card hover:bg-white/15 text-amber-300 transition flex items-center gap-1.5 text-xs font-semibold"
+          title="Sonido interactivo"
+        >
+          <span id="sound-icon" class="text-base">🔊</span>
+          <span id="sound-label" class="hidden lg:inline">Sonido ON</span>
+        </button>
+
+        <a
+          href="#comprar"
+          class="btn-shine bg-gradient-to-r from-navidad-red to-rose-600 hover:from-rose-600 hover:to-navidad-red text-white font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2.5 rounded-xl shadow-glow-red transition transform hover:-translate-y-0.5"
+        >
+          Pedir por Rappi / Tienda
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== 2. HERO SECTION ==================== -->
+  <section id="inicio" class="relative z-10 pt-10 pb-16 sm:pt-16 sm:pb-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Columna de Copy Principal -->
+      <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-300/40 text-amber-200 text-xs sm:text-sm font-semibold tracking-wide">
+          <span>🕯️ Edición Limitada · 7 de Diciembre en Colombia</span>
+        </div>
+
+        <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-[3.4rem] leading-[1.12] tracking-tight">
+          ¿Escuchaste eso? <br class="hidden sm:inline" />
+          <span class="text-rose-400">No es pólvora…</span> <br />
+          <span class="gold-gradient-text">¡es el nuevo sabor de la Navidad!</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-amber-50/85 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+          Este 7 de diciembre sorprende a toda la cuadra con el nuevo <strong class="font-semibold text-amber-300">Bon Yurt Velitas Alpina</strong>: cremoso yogurt con sabor a <strong class="font-semibold text-white">natilla artesanal</strong> y un <strong class="font-semibold text-amber-300">cereal explosivo</strong> que chispea en tu boca con cada cucharada. Una fiesta segura y deliciosa para grandes y chicos.
+        </p>
+
+        <!-- Botones de Acción -->
+        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+          <a
+            href="#experiencia"
+            class="w-full sm:w-auto btn-shine bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-alpina-dark font-display font-extrabold text-sm sm:text-base px-7 py-4 rounded-2xl shadow-glow-gold hover:brightness-110 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+          >
+            <span>✨ Probar Simulador Chispeante</span>
+          </a>
+          <a
+            href="#velitas"
+            class="w-full sm:w-auto glass-card hover:bg-white/15 text-amber-100 font-semibold text-sm sm:text-base px-7 py-4 rounded-2xl transition flex items-center justify-center gap-2"
+          >
+            <span>🕯️ Encender mi Velita</span>
+          </a>
+        </div>
+
+        <!-- Badges de Confianza -->
+        <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs sm:text-sm text-amber-200/80">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>100% Seguro (Sin pólvora)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>🥣 Natilla Artesanal + Popping Cereal</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span>🇨🇴 Hecho para la noche de Velitas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Ilustración 3D Interactiva del Envase Bon Yurt Velitas -->
+      <div class="lg:col-span-5 flex justify-center perspective-container">
+        <div
+          id="hero-product-card"
+          class="tilt-card relative w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 shadow-2xl border border-amber-300/35 cursor-pointer select-none"
+          title="Mueve el cursor o toca el envase para interactuar"
+        >
+          <!-- Halo luminoso detrás del envase -->
+          <div class="absolute -inset-2 bg-gradient-to-tr from-navidad-red/30 via-amber-400/25 to-alpina-light/30 rounded-3xl blur-2xl -z-10"></div>
+
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-xs font-bold uppercase tracking-widest text-amber-300 bg-alpina-dark/70 px-3 py-1 rounded-full border border-amber-400/30">
+              ¡Tócame para chispear!
+            </span>
+            <span class="text-xs font-semibold text-rose-300">Edición 7 Dic</span>
+          </div>
+
+          <!-- SVG Vectorial Detallado del Envase Bon Yurt Doble Compartimento -->
+          <div class="float-product flex justify-center my-2">
+            <svg viewBox="0 0 320 340" class="w-64 sm:w-72 h-auto drop-shadow-[0_20px_25px_rgba(0,0,0,0.6)]">
+              <defs>
+                <linearGradient id="cupRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#E11D48" />
+                  <stop offset="50%" stop-color="#C8102E" />
+                  <stop offset="100%" stop-color="#88081C" />
+                </linearGradient>
+                <linearGradient id="lidGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#FDE68A" />
+                  <stop offset="50%" stop-color="#F59E0B" />
+                  <stop offset="100%" stop-color="#D97706" />
+                </linearGradient>
+                <linearGradient id="domePlastic" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.55)" />
+                  <stop offset="100%" stop-color="rgba(255,255,255,0.12)" />
+                </linearGradient>
+                <linearGradient id="alpinaBlueBadge" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#0052A5" />
+                  <stop offset="100%" stop-color="#002B5B" />
+                </linearGradient>
+              </defs>
+
+              <!-- Chispas decorativas alrededor del envase -->
+              <g class="animate-pulse">
+                <circle cx="48" cy="75" r="4" fill="#FCD34D" />
+                <circle cx="275" cy="65" r="5" fill="#F59E0B" />
+                <circle cx="35" cy="180" r="3.5" fill="#FB7185" />
+                <circle cx="285" cy="195" r="4.5" fill="#FDE047" />
+                <path d="M260 110 L264 100 L268 110 L278 114 L268 118 L264 128 L260 118 L250 114 Z" fill="#FCD34D" />
+                <path d="M55 125 L58 118 L61 125 L68 128 L61 131 L58 138 L55 131 L48 128 Z" fill="#FDE68A" />
+              </g>
+
+              <!-- Domo Superior Transparente con Cereal Explosivo -->
+              <path d="M72 95 C72 42, 248 42, 248 95 Z" fill="url(#domePlastic)" stroke="rgba(255,255,255,0.6)" stroke-width="2" />
+              <!-- Bolitas de Cereal Explosivo Dorado, Rojo y Blanco dentro del domo -->
+              <circle cx="115" cy="82" r="9" fill="#F59E0B" />
+              <circle cx="136" cy="74" r="10" fill="#FDE047" />
+              <circle cx="158" cy="80" r="9.5" fill="#E11D48" />
+              <circle cx="180" cy="73" r="10" fill="#F59E0B" />
+              <circle cx="202" cy="82" r="9" fill="#FFFBEB" />
+              <circle cx="126" cy="88" r="8.5" fill="#FB7185" />
+              <circle cx="149" cy="89" r="9" fill="#FBBF24" />
+              <circle cx="172" cy="88" r="8.5" fill="#FDE047" />
+              <circle cx="192" cy="89" r="8" fill="#F59E0B" />
+
+              <!-- Borde / Tapa Dorada Metalizada -->
+              <rect x="62" y="93" width="196" height="16" rx="8" fill="url(#lidGoldGrad)" stroke="#FFFBEB" stroke-width="1.5" />
+
+              <!-- Vaso Principal Rojo Navideño -->
+              <path d="M74 109 L246 109 L222 292 C220 306, 208 314, 194 314 L126 314 C112 314, 100 306, 98 292 Z" fill="url(#cupRedGrad)" />
+
+              <!-- Onda dorada festiva en el vaso -->
+              <path d="M78 145 Q160 175 242 145 L236 195 Q160 222 84 195 Z" fill="rgba(252, 211, 77, 0.18)" />
+
+              <!-- Logo Alpina en el vaso -->
+              <rect x="118" y="122" width="84" height="30" rx="15" fill="url(#alpinaBlueBadge)" stroke="#FFFFFF" stroke-width="2" />
+              <text x="160" y="143" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, sans-serif" font-weight="900" font-size="16">Alpina</text>
+
+              <!-- Tipografía Bon Yurt -->
+              <text x="160" y="182" text-anchor="middle" fill="#FFFBEB" font-family="Montserrat, sans-serif" font-weight="900" font-size="27" letter-spacing="-0.5">Bon Yurt</text>
+
+              <!-- Cinta Edición Velitas -->
+              <rect x="96" y="192" width="128" height="24" rx="12" fill="#F59E0B" />
+              <text x="160" y="208" text-anchor="middle" fill="#001B3A" font-family="Montserrat, sans-serif" font-weight="800" font-size="12" letter-spacing="1">EDICIÓN VELITAS</text>
+
+              <!-- Descripción del sabor en el vaso -->
+              <text x="160" y="236" text-anchor="middle" fill="#FDE68A" font-family="Poppins, sans-serif" font-weight="600" font-size="11.5">Yogurt Sabor Natilla Artesanal</text>
+              <text x="160" y="252" text-anchor="middle" fill="#FFFFFF" font-family="Poppins, sans-serif" font-weight="700" font-size="11">+ Cereal Explosivo ✨</text>
+
+              <!-- Ilustración de Velita Encendida en la parte inferior del vaso -->
+              <rect x="153" y="274" width="14" height="26" rx="3" fill="#FFFBEB" />
+              <path d="M153 280 L167 285 M153 288 L167 293" stroke="#C8102E" stroke-width="2.5" />
+              <path class="candle-flame" d="M160 256 C166 264, 166 271, 160 273 C154 271, 154 264, 160 256 Z" fill="#FCD34D" />
+            </svg>
+          </div>
+
+          <!-- Pie interactivo del envase -->
+          <div class="text-center mt-2">
+            <p class="text-xs text-amber-200/90 font-medium">
+              Haz clic en el vaso para escuchar cómo chispea 🎆
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== 3. EXPERIENCE ZONE: SIMULADOR "MEZCLA Y CHISPEA" ==================== -->
+  <section id="experiencia" class="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-amber-300/15 bg-alpina-dark/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Experiencia Interactiva</span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-white">
+          Simulador <span class="gold-gradient-text">"Mezcla y Chispea"</span>
+        </h2>
+        <p class="text-sm sm:text-base text-amber-100/80">
+          Sigue los 3 pasos para preparar tu Bon Yurt Edición Velitas y siente la explosión dulce del cereal sobre la natilla cremosa.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-card rounded-3xl p-6 sm:p-10 shadow-2xl">
+        
+        <!-- Escenario Visual Interactivo (Izquierda) -->
+        <div class="lg:col-span-6 relative flex flex-col items-center justify-center bg-gradient-to-b from-alpina-blue/40 to-alpina-dark/90 rounded-2xl p-6 border border-amber-300/20 min-h-[360px] overflow-hidden">
+          <!-- Canvas local para partículas de explosión del cereal -->
+          <canvas id="simulator-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-20"></canvas>
+
+          <!-- Contador de Chisporroteos -->
+          <div class="absolute top-4 right-4 z-10 bg-alpina-dark/85 border border-amber-400/40 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+            <span class="text-amber-300 text-sm">⚡</span>
+            <span class="text-xs font-semibold text-amber-100">Chispazos:</span>
+            <span id="pop-counter" class="font-display font-black text-base text-amber-400">0</span>
+          </div>
+
+          <!-- Estado Visual del Tazón / Vaso -->
+          <div id="bowl-stage" class="relative z-10 flex flex-col items-center transition-transform duration-300">
+            <svg id="interactive-bowl-svg" viewBox="0 0 280 250" class="w-60 sm:w-64 h-auto">
+              <!-- Cuchara (aparece en paso 3) -->
+              <g id="svg-spoon" class="opacity-0 transition-all duration-500" transform="translate(35, -25) rotate(-18)">
+                <rect x="135" y="10" width="10" height="115" rx="5" fill="#E2E8F0" />
+                <ellipse cx="140" cy="130" rx="22" ry="30" fill="#CBD5E1" stroke="#94A3B8" stroke-width="2" />
+                <ellipse cx="140" cy="132" rx="16" ry="22" fill="#FDE68A" />
+              </g>
+
+              <!-- Vaso abierto vista superior-frontal -->
+              <path d="M45 95 L235 95 L212 215 C210 226, 200 232, 188 232 L92 232 C80 232, 70 226, 68 215 Z" fill="#C8102E" stroke="#F59E0B" stroke-width="3" />
+              
+              <!-- Interior del vaso (Yogurt cremoso de Natilla Artesanal con canela) -->
+              <ellipse cx="140" cy="95" rx="95" ry="26" fill="#FDE68A" stroke="#F59E0B" stroke-width="3" />
+              <ellipse cx="140" cy="97" rx="82" ry="19" fill="#FEF3C7" />
+              <!-- Toques de canela en polvo sobre la natilla -->
+              <circle cx="120" cy="95" r="1.5" fill="#92400E" opacity="0.6" />
+              <circle cx="155" cy="99" r="1.5" fill="#92400E" opacity="0.6" />
+              <circle cx="142" cy="91" r="1.5" fill="#92400E" opacity="0.6" />
+              <circle cx="168" cy="94" r="1.5" fill="#92400E" opacity="0.6" />
+
+              <!-- Grupo de Cereal Explosivo vertido (oculto hasta paso 2) -->
+              <g id="svg-poured-cereal" class="opacity-0 transition-opacity duration-500">
+                <circle cx="105" cy="95" r="7" fill="#F59E0B" />
+                <circle cx="122" cy="90" r="8" fill="#E11D48" />
+                <circle cx="140" cy="96" r="8.5" fill="#FACC15" />
+                <circle cx="158" cy="91" r="7.5" fill="#F59E0B" />
+                <circle cx="174" cy="96" r="7" fill="#FB7185" />
+                <circle cx="115" cy="102" r="7" fill="#FDE047" />
+                <circle cx="133" cy="103" r="8" fill="#F59E0B" />
+                <circle cx="151" cy="102" r="7.5" fill="#E11D48" />
+                <circle cx="166" cy="101" r="6.5" fill="#FFFBEB" />
+              </g>
+
+              <!-- Tapa de aluminio cerrada (visible en paso 0, se retira en paso 1) -->
+              <g id="svg-foil-lid" class="transition-all duration-500">
+                <ellipse cx="140" cy="95" rx="97" ry="28" fill="#F59E0B" stroke="#FFFBEB" stroke-width="2.5" />
+                <path d="M225 83 L254 74 L248 93 Z" fill="#FDE68A" stroke="#D97706" stroke-width="1.5" />
+                <text x="140" y="99" text-anchor="middle" fill="#001B3A" font-family="Montserrat, sans-serif" font-weight="900" font-size="13">ALPINA · VELITAS</text>
+              </g>
+
+              <!-- Etiqueta frontal del vaso -->
+              <text x="140" y="162" text-anchor="middle" fill="#FFFBEB" font-family="Montserrat, sans-serif" font-weight="900" font-size="22">Bon Yurt</text>
+              <text x="140" y="182" text-anchor="middle" fill="#FCD34D" font-family="Poppins, sans-serif" font-weight="600" font-size="12">Natilla &amp; Chispas</text>
+            </svg>
+          </div>
+
+          <!-- Mensaje dinámico de retroalimentación -->
+          <div id="simulator-feedback" class="relative z-10 mt-3 text-center px-4 py-2 rounded-xl bg-white/10 text-amber-200 text-xs sm:text-sm font-medium">
+            Paso 1: Haz clic en <strong>"Destapar el Bon Yurt"</strong> para comenzar.
+          </div>
+        </div>
+
+        <!-- Panel de Controles Interactivos (Derecha) -->
+        <div class="lg:col-span-6 space-y-5">
+          <div class="space-y-2">
+            <h3 class="font-display font-bold text-xl sm:text-2xl text-amber-300">
+              ¡Activa los sentidos de la Navidad!
+            </h3>
+            <p class="text-xs sm:text-sm text-amber-50/80">
+              Cada acción activa sonidos reales sintetizados y animaciones de chisporroteo dulce en pantalla.
+            </p>
+          </div>
+
+          <!-- Botón Paso 1 -->
+          <button
+            id="btn-step-1"
+            type="button"
+            class="w-full p-4 rounded-2xl border border-amber-300/40 bg-gradient-to-r from-alpina-blue to-alpina-light hover:brightness-110 text-left flex items-center justify-between transition shadow-lg group"
+          >
+            <div class="flex items-center gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-amber-400 text-alpina-dark font-display font-black flex items-center justify-center text-base">1</span>
+              <div>
+                <div class="font-display font-bold text-sm sm:text-base text-white">Destapar el Bon Yurt</div>
+                <div class="text-xs text-amber-100/80">Retira el sello dorado y descubre el yogurt de natilla</div>
+              </div>
+            </div>
+            <span id="badge-step-1" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-300">Listo</span>
+          </button>
+
+          <!-- Botón Paso 2 -->
+          <button
+            id="btn-step-2"
+            type="button"
+            disabled
+            class="w-full p-4 rounded-2xl border border-white/15 bg-white/5 disabled:opacity-45 disabled:cursor-not-allowed enabled:hover:bg-white/15 enabled:border-amber-300/40 text-left flex items-center justify-between transition shadow-lg"
+          >
+            <div class="flex items-center gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-navidad-red text-white font-display font-black flex items-center justify-center text-base">2</span>
+              <div>
+                <div class="font-display font-bold text-sm sm:text-base text-white">Verter el Cereal Explosivo</div>
+                <div class="text-xs text-amber-100/80">Mezcla las bolitas crujientes con popping candy</div>
+              </div>
+            </div>
+            <span id="badge-step-2" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-white/10 text-amber-200/70">Bloqueado</span>
+          </button>
+
+          <!-- Botón Paso 3 -->
+          <button
+            id="btn-step-3"
+            type="button"
+            disabled
+            class="w-full p-4 rounded-2xl border border-white/15 bg-white/5 disabled:opacity-45 disabled:cursor-not-allowed enabled:bg-gradient-to-r enabled:from-amber-500 enabled:to-yellow-500 enabled:text-alpina-dark enabled:border-amber-200 enabled:hover:brightness-105 text-left flex items-center justify-between transition shadow-glow-gold"
+          >
+            <div class="flex items-center gap-3.5">
+              <span class="w-9 h-9 rounded-xl bg-alpina-dark text-amber-300 font-display font-black flex items-center justify-center text-base">3</span>
+              <div>
+                <div class="font-display font-extrabold text-sm sm:text-base">¡Probar una Cucharada!</div>
+                <div class="text-xs opacity-85">Haz clic repetidas veces para sentir el chisporroteo</div>
+              </div>
+            </div>
+            <span id="badge-step-3" class="text-xs font-bold px-2.5 py-1 rounded-lg bg-black/20">Bloqueado</span>
+          </button>
+
+          <!-- Botón Reiniciar Simulador -->
+          <div class="flex justify-end pt-1">
+            <button
+              id="btn-reset-sim"
+              type="button"
+              class="text-xs text-amber-300/80 hover:text-amber-300 underline underline-offset-4 transition"
+            >
+              ↺ Reiniciar preparación
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 4. PROPUESTA DE VALOR Y NUTRICIÓN ==================== -->
+  <section id="innovacion" class="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-rose-400">Innovación Alpina</span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-white">
+          ¿Por qué todos en la cuadra hablan de <span class="gold-gradient-text">Bon Yurt Velitas</span>?
+        </h2>
+        <p class="text-sm sm:text-base text-amber-100/80">
+          Combinamos el postre más querido de diciembre en Colombia con una experiencia sensorial divertida y segura.
+        </p>
+      </div>
+
+      <!-- Grid de 3 Diferenciadores -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Tarjeta 1 -->
+        <div class="glass-card rounded-3xl p-7 hover:-translate-y-1.5 transition duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-amber-400/20 border border-amber-300/40 flex items-center justify-center text-3xl mb-5">
+              🍮
+            </div>
+            <h3 class="font-display font-bold text-xl text-amber-300 mb-2.5">
+              Sabor Natilla Artesanal
+            </h3>
+            <p class="text-sm text-amber-50/80 leading-relaxed">
+              Cremoso yogurt Alpina infusionado con notas auténticas de panela, leche fresca y un toque suave de canela que evoca la receta casera de la abuela.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/10 text-xs font-semibold text-amber-200">
+            ✓ Con leche 100% colombiana
+          </div>
+        </div>
+
+        <!-- Tarjeta 2 -->
+        <div class="glass-card rounded-3xl p-7 hover:-translate-y-1.5 transition duration-300 flex flex-col justify-between border-amber-400/45 shadow-glow-gold">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-navidad-red/30 border border-rose-400/40 flex items-center justify-center text-3xl mb-5">
+              ✨
+            </div>
+            <h3 class="font-display font-bold text-xl text-rose-300 mb-2.5">
+              Cereal Explosivo (Popping Candy)
+            </h3>
+            <p class="text-sm text-amber-50/80 leading-relaxed">
+              Crujientes esferas bañadas en cristales efervescentes de caramelo que chispean suavemente al contacto con el yogurt. Diversión garantizada para grandes y chicos.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/10 text-xs font-semibold text-rose-300">
+            ✓ La chispa más segura de diciembre
+          </div>
+        </div>
+
+        <!-- Tarjeta 3 -->
+        <div class="glass-card rounded-3xl p-7 hover:-translate-y-1.5 transition duration-300 flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-alpina-light/25 border border-sky-400/40 flex items-center justify-center text-3xl mb-5">
+              🕯️
+            </div>
+            <h3 class="font-display font-bold text-xl text-sky-300 mb-2.5">
+              Tradición del 7 de Diciembre
+            </h3>
+            <p class="text-sm text-amber-50/80 leading-relaxed">
+              Listo para destapar y compartir en el andén mientras prendes las velitas en familia. No necesita preparación y trae la alegría de las novenas a cualquier hora.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-white/10 text-xs font-semibold text-sky-300">
+            ✓ Presentación individual y 4-Pack familiar
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra / Acordeón Interactivo de Información Nutricional -->
+      <div class="mt-10 glass-card rounded-3xl p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">📊</span>
+            <div>
+              <h4 class="font-display font-bold text-lg text-white">Información Nutricional (Por envase de 165 g)</h4>
+              <p class="text-xs text-amber-200/75">Alimento lácteo fuente de calcio y proteína para disfrutar en familia.</p>
+            </div>
+          </div>
+          <button
+            id="toggle-nutrition-btn"
+            type="button"
+            class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-amber-300 text-xs sm:text-sm font-semibold transition self-start sm:self-auto"
+          >
+            Ver tabla nutricional ▾
+          </button>
+        </div>
+
+        <div id="nutrition-panel" class="hidden mt-6 pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-alpina-dark/70 p-4 rounded-2xl border border-white/10 text-center">
+            <div class="text-xs text-amber-200/75 uppercase">Energía</div>
+            <div class="font-display font-black text-2xl text-amber-300 mt-1">185 kcal</div>
+            <div class="text-[11px] text-white/60">9% Valor Diario</div>
+          </div>
+          <div class="bg-alpina-dark/70 p-4 rounded-2xl border border-white/10 text-center">
+            <div class="text-xs text-amber-200/75 uppercase">Proteína</div>
+            <div class="font-display font-black text-2xl text-white mt-1">5.2 g</div>
+            <div class="text-[11px] text-white/60">10% Valor Diario</div>
+          </div>
+          <div class="bg-alpina-dark/70 p-4 rounded-2xl border border-white/10 text-center">
+            <div class="text-xs text-amber-200/75 uppercase">Calcio</div>
+            <div class="font-display font-black text-2xl text-sky-300 mt-1">160 mg</div>
+            <div class="text-[11px] text-white/60">16% Valor Diario</div>
+          </div>
+          <div class="bg-alpina-dark/70 p-4 rounded-2xl border border-white/10 text-center">
+            <div class="text-xs text-amber-200/75 uppercase">Grasa Total</div>
+            <div class="font-display font-black text-2xl text-rose-300 mt-1">3.5 g</div>
+            <div class="text-[11px] text-white/60">5% Valor Diario</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5. MURO INTERACTIVO "ENCIENDE TU VELITA DE LOS DESEOS" ==================== -->
+  <section id="velitas" class="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-amber-300/15 bg-gradient-to-b from-alpina-dark/60 to-black/50">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-300">Tradición Digital Colombiana</span>
+        <h2 class="font-display font-black text-3xl sm:text-4xl text-white">
+          Enciende tu <span class="gold-gradient-text">Velita de los Deseos</span>
+        </h2>
+        <p class="text-sm sm:text-base text-amber-100/80">
+          Escribe tu deseo para esta Navidad, elige el color de tu velita y súmala a nuestra cuadra iluminada junto a familias de toda Colombia.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Formulario para crear y encender velita -->
+        <form id="candle-form" class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 space-y-5 shadow-xl">
+          <h3 class="font-display font-bold text-xl text-amber-300 flex items-center gap-2">
+            <span>🕯️ Prende tu vela en la cuadra</span>
+          </h3>
+
+          <div>
+            <label for="wish-author" class="block text-xs font-semibold text-amber-100 mb-1.5">Tu nombre o familia y ciudad</label>
+            <input
+              id="wish-author"
+              type="text"
+              maxlength="40"
+              placeholder="Ej: Familia Rodríguez · Bogotá"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-alpina-dark/80 border border-amber-300/30 text-white placeholder-white/40 text-sm focus:outline-none focus:border-amber-400"
+            />
+          </div>
+
+          <div>
+            <label for="wish-text" class="block text-xs font-semibold text-amber-100 mb-1.5">Tu deseo para este 7 de diciembre</label>
+            <textarea
+              id="wish-text"
+              rows="3"
+              maxlength="120"
+              placeholder="Ej: Salud, unión familiar y muchas noches compartiendo en paz..."
+              required
+              class="w-full px-4 py-3 rounded-xl bg-alpina-dark/80 border border-amber-300/30 text-white placeholder-white/40 text-sm focus:outline-none focus:border-amber-400 resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Selector de Color de Velita -->
+          <div>
+            <span class="block text-xs font-semibold text-amber-100 mb-2">Elige el color de tu velita:</span>
+            <div class="grid grid-cols-4 gap-2.5" id="candle-color-options">
+              <button type="button" data-color="#F59E0B" data-name="Dorada (Prosperidad)" class="color-choice active ring-2 ring-white p-2.5 rounded-xl bg-amber-500/20 border border-amber-400 flex flex-col items-center gap-1 text-[11px] font-semibold text-amber-200">
+                <span class="w-5 h-5 rounded-full bg-amber-400 shadow"></span>
+                <span>Dorada</span>
+              </button>
+              <button type="button" data-color="#E11D48" data-name="Roja (Amor)" class="color-choice p-2.5 rounded-xl bg-rose-500/15 border border-rose-400/40 flex flex-col items-center gap-1 text-[11px] font-semibold text-rose-200">
+                <span class="w-5 h-5 rounded-full bg-rose-500 shadow"></span>
+                <span>Roja</span>
+              </button>
+              <button type="button" data-color="#0284C7" data-name="Azul Alpina (Paz)" class="color-choice p-2.5 rounded-xl bg-sky-500/15 border border-sky-400/40 flex flex-col items-center gap-1 text-[11px] font-semibold text-sky-200">
+                <span class="w-5 h-5 rounded-full bg-sky-500 shadow"></span>
+                <span>Azul</span>
+              </button>
+              <button type="button" data-color="#FFFBEB" data-name="Blanca (Armonía)" class="color-choice p-2.5 rounded-xl bg-white/10 border border-white/30 flex flex-col items-center gap-1 text-[11px] font-semibold text-white">
+                <span class="w-5 h-5 rounded-full bg-amber-50 shadow"></span>
+                <span>Blanca</span>
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full btn-shine bg-gradient-to-r from-amber-400 to-amber-500 hover:brightness-110 text-alpina-dark font-display font-extrabold py-3.5 rounded-xl shadow-glow-gold transition flex items-center justify-center gap-2 text-sm sm:text-base"
+          >
+            <span>🔥 Encender mi Velita Ahora</span>
+          </button>
+        </form>
+
+        <!-- Calle Iluminada con Velitas Virtuales -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="flex items-center justify-between px-2">
+            <span class="text-xs sm:text-sm font-semibold text-amber-200">
+              ✨ Velitas encendidas en nuestra cuadra virtual: <strong id="candles-count" class="text-amber-400">4</strong>
+            </span>
+            <span class="text-xs text-amber-100/60">Actualizado en vivo</span>
+          </div>
+
+          <div id="candles-wall" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[480px] overflow-y-auto pr-1">
+            <!-- Las tarjetas de velitas se renderizan dinámicamente con JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. SECCIÓN DE COMPRA / DISPONIBILIDAD ==================== -->
+  <section id="comprar" class="relative z-10 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-amber-300/15">
+    <div class="max-w-5xl mx-auto glass-card-strong rounded-3xl p-6 sm:p-12 shadow-2xl border border-amber-300/35">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Información de Disponibilidad -->
+        <div class="lg:col-span-6 space-y-4">
+          <span class="inline-block px-3 py-1 rounded-full bg-navidad-red/30 border border-rose-400/40 text-rose-200 text-xs font-bold uppercase tracking-wider">
+            Disponible en toda Colombia
+          </span>
+          <h2 class="font-display font-black text-3xl sm:text-4xl text-white leading-tight">
+            ¡Búscalo ya antes de que se agote esta Navidad!
+          </h2>
+          <p class="text-sm sm:text-base text-amber-100/85 leading-relaxed">
+            Encuéntralo en tu tienda de barrio más cercana, supermercados de cadena o pídelo a domicilio en minutos por <strong>Rappi</strong> para tenerlo frío en tu mesa este 7 de diciembre.
+          </p>
+
+          <!-- Selector de Canal de Entrega -->
+          <div class="pt-2 space-y-2">
+            <span class="block text-xs font-semibold text-amber-300 uppercase tracking-wider">1. Elige cómo quieres recibirlo:</span>
+            <div class="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                id="channel-rappi"
+                class="channel-btn active p-3.5 rounded-2xl border-2 border-orange-400 bg-orange-500/20 text-left transition"
+              >
+                <div class="font-display font-extrabold text-sm text-orange-300">🛵 Rappi Turbo</div>
+                <div class="text-[11px] text-amber-100/80 mt-0.5">Entrega en ~15 min</div>
+              </button>
+              <button
+                type="button"
+                id="channel-tienda"
+                class="channel-btn p-3.5 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10 text-left transition"
+              >
+                <div class="font-display font-extrabold text-sm text-amber-200">🏪 Tienda Cercana</div>
+                <div class="text-[11px] text-amber-100/80 mt-0.5">Reserva y recoge ya</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Configurador de Pedido en COP -->
+        <div class="lg:col-span-6 bg-alpina-dark/90 rounded-2xl p-6 border border-amber-300/25 space-y-5">
+          <div>
+            <span class="block text-xs font-semibold text-amber-300 uppercase tracking-wider mb-2.5">2. Selecciona tu presentación:</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                type="button"
+                id="pack-single"
+                data-price="4500"
+                data-title="Bon Yurt Velitas Individual (165 g)"
+                class="pack-btn active p-3.5 rounded-xl border-2 border-amber-400 bg-amber-400/15 text-left transition"
+              >
+                <div class="text-xs font-bold text-amber-300">Individual</div>
+                <div class="font-display font-black text-lg text-white mt-0.5">$4.500 <span class="text-xs font-normal text-amber-100/70">COP</span></div>
+                <div class="text-[11px] text-amber-100/70">1 vaso de 165 g</div>
+              </button>
+
+              <button
+                type="button"
+                id="pack-four"
+                data-price="16500"
+                data-title="4-Pack Familiar Velitas (4 x 165 g)"
+                class="pack-btn p-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-left transition"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-bold text-rose-300">4-Pack Navideño</span>
+                  <span class="text-[10px] bg-navidad-red text-white px-1.5 py-0.5 rounded font-bold">AHORRA</span>
+                </div>
+                <div class="font-display font-black text-lg text-white mt-0.5">$16.500 <span class="text-xs font-normal text-amber-100/70">COP</span></div>
+                <div class="text-[11px] text-amber-100/70">Ideal para la cuadra</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cantidad y Total -->
+          <div class="flex items-center justify-between pt-2 border-t border-white/10">
+            <div>
+              <span class="block text-xs text-amber-100/75">Cantidad</span>
+              <div class="flex items-center gap-3 mt-1">
+                <button type="button" id="qty-minus" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 font-bold text-lg flex items-center justify-center">−</button>
+                <span id="qty-value" class="font-display font-black text-xl w-6 text-center">1</span>
+                <button type="button" id="qty-plus" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 font-bold text-lg flex items-center justify-center">+</button>
+              </div>
+            </div>
+
+            <div class="text-right">
+              <span class="block text-xs text-amber-100/75">Total estimado</span>
+              <div id="order-total" class="font-display font-black text-2xl sm:text-3xl text-amber-300">$4.500 COP</div>
+            </div>
+          </div>
+
+          <button
+            id="confirm-order-btn"
+            type="button"
+            class="w-full btn-shine bg-gradient-to-r from-navidad-red to-rose-600 hover:from-rose-600 hover:to-navidad-red text-white font-display font-extrabold py-4 rounded-xl shadow-glow-red transition text-sm sm:text-base flex items-center justify-center gap-2"
+          >
+            <span>🎁 Confirmar Pedido Navideño</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER OFICIAL ==================== -->
+  <footer class="relative z-10 border-t border-amber-300/20 bg-alpina-dark/95 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+      <div class="flex items-center gap-3">
+        <div class="bg-white text-alpina-blue font-display font-black text-2xl px-4 py-1.5 rounded-xl">
+          Alpina
+        </div>
+        <div>
+          <p class="font-display font-extrabold text-amber-300 text-base tracking-wide">
+            Alpina, alimenta tu vida.
+          </p>
+          <p class="text-xs text-amber-100/65">
+            Campaña Edición Especial Día de las Velitas · Colombia
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-amber-100/60 space-y-1">
+        <p>© 2026 Alpina Productos Alimenticios S.A.S. BIC · Todos los derechos reservados.</p>
+        <p>Celebra este 7 de diciembre en familia, sin pólvora y con toda la chispa del sabor.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL DE CONFIRMACIÓN DE PEDIDO (SIN ALERT) ==================== -->
+  <div id="order-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="glass-card-strong max-w-md w-full rounded-3xl p-6 sm:p-8 border border-amber-300/40 text-center space-y-5 shadow-2xl transform transition-all">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-4xl">
+        🎉
+      </div>
+      <div class="space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-300">¡Pedido Listo para Chispear!</span>
+        <h3 class="font-display font-black text-2xl text-white">¡Gracias por celebrar con Alpina!</h3>
+        <p id="modal-summary" class="text-sm text-amber-100/85 leading-relaxed">
+          Tu pedido ha sido preparado.
+        </p>
+      </div>
+      <div class="bg-alpina-dark/90 p-3.5 rounded-xl border border-amber-300/25 text-xs text-amber-200">
+        Código de celebración: <strong id="modal-code" class="font-display text-amber-400 tracking-wider">VELITAS-2026</strong>
+      </div>
+      <button
+        id="close-modal-btn"
+        type="button"
+        class="w-full py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-alpina-dark font-display font-extrabold text-sm transition"
+      >
+        ¡Entendido, feliz noche de Velitas!
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT INTERACTIVO Y WEB AUDIO API ==================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      /* =====================================================================
+         1. MOTOR DE AUDIO SINTETIZADO (WEB AUDIO API - SIN ARCHIVOS EXTERNOS)
+      ===================================================================== */
+      let audioCtx = null;
+      let soundEnabled = true;
+
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            audioCtx = new AudioContextClass();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      // Efecto 1: Destape de tapa metálica (Peel & Pop)
+      function playPeelSound() {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        // Ruido filtrado simulando despegar aluminio
+        const bufferSize = audioCtx.sampleRate * 0.28;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.09));
+        }
+
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1400, now);
+        filter.frequency.exponentialRampToValueAtTime(3800, now + 0.25);
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.28);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        noise.start(now);
+      }
+
+      // Efecto 2: Verter cereal crujiente
+      function playCrunchPourSound() {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        for (let i = 0; i < 14; i++) {
+          const startTime = now + i * 0.035 + Math.random() * 0.015;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(420 + Math.random() * 550, startTime);
+          osc.frequency.exponentialRampToValueAtTime(120, startTime + 0.03);
+
+          gain.gain.setValueAtTime(0.18, startTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.035);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(startTime);
+          osc.stop(startTime + 0.04);
+        }
+      }
+
+      // Efecto 3: Chisporroteo dulce (Popping Candy)
+      function playPoppingCandySound() {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        const pops = 18;
+        for (let i = 0; i < pops; i++) {
+          const delay = Math.random() * 0.65;
+          const t = now + delay;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+
+          osc.type = 'sine';
+          const baseFreq = 1200 + Math.random() * 2600;
+          osc.frequency.setValueAtTime(baseFreq, t);
+          osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.35, t + 0.025);
+
+          gain.gain.setValueAtTime(0.22, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.028);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + 0.03);
+        }
+      }
+
+      // Efecto 4: Encender velita (destello cálido musical)
+      function playCandleChimeSound() {
+        if (!soundEnabled) return;
+        initAudio();
+        if (!audioCtx) return;
+
+        const now = audioCtx.currentTime;
+        const notes = [523.25, 659.25, 783.99, 1046.5]; // Do - Mi - Sol - Do alto
+        notes.forEach((freq, idx) => {
+          const t = now + idx * 0.07;
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t);
+
+          gain.gain.setValueAtTime(0.14, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.45);
+
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + 0.48);
+        });
+      }
+
+      // Control del botón de sonido en el header
+      const soundToggleBtn = document.getElementById('sound-toggle-btn');
+      const soundIcon = document.getElementById('sound-icon');
+      const soundLabel = document.getElementById('sound-label');
+
+      soundToggleBtn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) {
+          initAudio();
+          soundIcon.textContent = '🔊';
+          soundLabel.textContent = 'Sonido ON';
+          playCandleChimeSound();
+        } else {
+          soundIcon.textContent = '🔇';
+          soundLabel.textContent = 'Sonido OFF';
+        }
+      });
+
+      /* =====================================================================
+         2. PARTÍCULAS DE FONDO (LUCES DE VELITAS Y CHISPAS DORADAS)
+      ===================================================================== */
+      const bgCanvas = document.getElementById('bg-particles');
+      const bgCtx = bgCanvas.getContext('2d');
+      let bgParticles = [];
+
+      function resizeBgCanvas() {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeBgCanvas);
+      resizeBgCanvas();
+
+      function createBgParticles() {
+        bgParticles = [];
+        const count = Math.min(55, Math.floor(window.innerWidth / 25));
+        const colors = ['#FCD34D', '#F59E0B', '#FB7185', '#FFFBEB'];
+        for (let i = 0; i < count; i++) {
+          bgParticles.push({
+            x: Math.random() * bgCanvas.width,
+            y: Math.random() * bgCanvas.height,
+            radius: Math.random() * 2.6 + 1,
+            speedY: -(Math.random() * 0.45 + 0.15),
+            speedX: (Math.random() - 0.5) * 0.3,
+            alpha: Math.random() * 0.7 + 0.2,
+            color: colors[Math.floor(Math.random() * colors.length)]
+          });
+        }
+      }
+      createBgParticles();
+
+      function animateBgParticles() {
+        bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+        bgParticles.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          if (p.y < -10) {
+            p.y = bgCanvas.height + 10;
+            p.x = Math.random() * bgCanvas.width;
+          }
+          bgCtx.beginPath();
+          bgCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          bgCtx.fillStyle = p.color;
+          bgCtx.globalAlpha = p.alpha;
+          bgCtx.shadowBlur = 10;
+          bgCtx.shadowColor = p.color;
+          bgCtx.fill();
+        });
+        bgCtx.globalAlpha = 1;
+        bgCtx.shadowBlur = 0;
+        requestAnimationFrame(animateBgParticles);
+      }
+      animateBgParticles();
+
+      /* =====================================================================
+         3. INTERACCIÓN 3D TILT DEL ENVASE EN EL HERO
+      ===================================================================== */
+      const heroCard = document.getElementById('hero-product-card');
+      heroCard.addEventListener('mousemove', (e) => {
+        const rect = heroCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+        heroCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      heroCard.addEventListener('mouseleave', () => {
+        heroCard.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+
+      heroCard.addEventListener('click', () => {
+        playPoppingCandySound();
+        heroCard.classList.add('scale-105');
+        setTimeout(() => heroCard.classList.remove('scale-105'), 180);
+      });
+
+      /* =====================================================================
+         4. SIMULADOR INTERACTIVO "MEZCLA Y CHISPEA"
+      ===================================================================== */
+      const simCanvas = document.getElementById('simulator-canvas');
+      const simCtx = simCanvas.getContext('2d');
+      let simSparks = [];
+
+      function resizeSimCanvas() {
+        const parent = simCanvas.parentElement;
+        simCanvas.width = parent.clientWidth;
+        simCanvas.height = parent.clientHeight;
+      }
+      window.addEventListener('resize', resizeSimCanvas);
+      resizeSimCanvas();
+
+      function triggerSparkBurst(amount = 32) {
+        const cx = simCanvas.width / 2;
+        const cy = simCanvas.height / 2;
+        const sparkColors = ['#FCD34D', '#F59E0B', '#FB7185', '#FFFFFF', '#38BDF8'];
+        for (let i = 0; i < amount; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 5 + 2;
+          simSparks.push({
+            x: cx + (Math.random() - 0.5) * 60,
+            y: cy + (Math.random() - 0.5) * 30,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.5,
+            size: Math.random() * 4 + 2,
+            life: 1,
+            decay: Math.random() * 0.025 + 0.015,
+            color: sparkColors[Math.floor(Math.random() * sparkColors.length)]
+          });
+        }
+      }
+
+      function animateSimSparks() {
+        simCtx.clearRect(0, 0, simCanvas.width, simCanvas.height);
+        for (let i = simSparks.length - 1; i >= 0; i--) {
+          const s = simSparks[i];
+          s.x += s.vx;
+          s.y += s.vy;
+          s.vy += 0.12; // gravedad suave
+          s.life -= s.decay;
+          if (s.life <= 0) {
+            simSparks.splice(i, 1);
+            continue;
+          }
+          simCtx.beginPath();
+          simCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          simCtx.fillStyle = s.color;
+          simCtx.globalAlpha = s.life;
+          simCtx.shadowBlur = 8;
+          simCtx.shadowColor = s.color;
+          simCtx.fill();
+        }
+        simCtx.globalAlpha = 1;
+        simCtx.shadowBlur = 0;
+        requestAnimationFrame(animateSimSparks);
+      }
+      animateSimSparks();
+
+      // Lógica de estados de los 3 pasos
+      const btnStep1 = document.getElementById('btn-step-1');
+      const btnStep2 = document.getElementById('btn-step-2');
+      const btnStep3 = document.getElementById('btn-step-3');
+      const btnResetSim = document.getElementById('btn-reset-sim');
+
+      const badgeStep1 = document.getElementById('badge-step-1');
+      const badgeStep2 = document.getElementById('badge-step-2');
+      const badgeStep3 = document.getElementById('badge-step-3');
+
+      const svgFoilLid = document.getElementById('svg-foil-lid');
+      const svgPouredCereal = document.getElementById('svg-poured-cereal');
+      const svgSpoon = document.getElementById('svg-spoon');
+      const bowlStage = document.getElementById('bowl-stage');
+      const simFeedback = document.getElementById('simulator-feedback');
+      const popCounterEl = document.getElementById('pop-counter');
+
+      let popCount = 0;
+
+      btnStep1.addEventListener('click', () => {
+        playPeelSound();
+        svgFoilLid.style.opacity = '0';
+        svgFoilLid.style.transform = 'translateY(-35px) rotate(-12deg)';
+        badgeStep1.textContent = '✓ Destapado';
+        badgeStep1.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-500/25 text-emerald-300';
+
+        btnStep2.disabled = false;
+        badgeStep2.textContent = 'Listo';
+        badgeStep2.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-300';
+
+        simFeedback.innerHTML = '🍮 ¡Destapado! Siente el aroma a <strong>natilla artesanal</strong>. Ahora vierte el cereal.';
+      });
+
+      btnStep2.addEventListener('click', () => {
+        playCrunchPourSound();
+        svgPouredCereal.style.opacity = '1';
+        triggerSparkBurst(18);
+        badgeStep2.textContent = '✓ Mezclado';
+        badgeStep2.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-500/25 text-emerald-300';
+
+        btnStep3.disabled = false;
+        badgeStep3.textContent = '¡Pruébalo!';
+        badgeStep3.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-alpina-dark text-amber-300';
+
+        simFeedback.innerHTML = '🥣 ¡Cereal explosivo servido! Haz clic en <strong>"¡Probar una Cucharada!"</strong>.';
+      });
+
+      btnStep3.addEventListener('click', () => {
+        playPoppingCandySound();
+        svgSpoon.style.opacity = '1';
+        svgSpoon.style.transform = 'translate(10px, -5px) rotate(-8deg)';
+        setTimeout(() => {
+          svgSpoon.style.transform = 'translate(22px, -16px) rotate(-14deg)';
+        }, 160);
+
+        bowlStage.classList.add('scale-105');
+        setTimeout(() => bowlStage.classList.remove('scale-105'), 160);
+
+        const newPops = Math.floor(Math.random() * 8) + 12;
+        popCount += newPops;
+        popCounterEl.textContent = popCount;
+        triggerSparkBurst(40);
+
+        simFeedback.innerHTML = `✨ <strong>¡CHISSS-POP! (+${newPops} chispazos)</strong> No es pólvora, ¡es el nuevo sabor de la Navidad!`;
+      });
+
+      btnResetSim.addEventListener('click', () => {
+        svgFoilLid.style.opacity = '1';
+        svgFoilLid.style.transform = 'translateY(0) rotate(0)';
+        svgPouredCereal.style.opacity = '0';
+        svgSpoon.style.opacity = '0';
+
+        btnStep2.disabled = true;
+        btnStep3.disabled = true;
+
+        badgeStep1.textContent = 'Listo';
+        badgeStep1.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-400/20 text-amber-300';
+        badgeStep2.textContent = 'Bloqueado';
+        badgeStep2.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-white/10 text-amber-200/70';
+        badgeStep3.textContent = 'Bloqueado';
+        badgeStep3.className = 'text-xs font-bold px-2.5 py-1 rounded-lg bg-black/20';
+
+        popCount = 0;
+        popCounterEl.textContent = '0';
+        simFeedback.innerHTML = 'Paso 1: Haz clic en <strong>"Destapar el Bon Yurt"</strong> para comenzar.';
+      });
+
+      /* =====================================================================
+         5. TABLA NUTRICIONAL INTERACTIVA
+      ===================================================================== */
+      const toggleNutritionBtn = document.getElementById('toggle-nutrition-btn');
+      const nutritionPanel = document.getElementById('nutrition-panel');
+
+      toggleNutritionBtn.addEventListener('click', () => {
+        const isHidden = nutritionPanel.classList.contains('hidden');
+        if (isHidden) {
+          nutritionPanel.classList.remove('hidden');
+          toggleNutritionBtn.textContent = 'Ocultar tabla nutricional ▴';
+        } else {
+          nutritionPanel.classList.add('hidden');
+          toggleNutritionBtn.textContent = 'Ver tabla nutricional ▾';
+        }
+      });
+
+      /* =====================================================================
+         6. MURO INTERACTIVO "ENCIENDE TU VELITA DE LOS DESEOS"
+      ===================================================================== */
+      const initialWishes = [
+        {
+          author: 'Familia Martínez · Bogotá',
+          text: 'Que nunca falte la salud, la unión en nuestra cuadra y momentos dulces para compartir en familia.',
+          color: '#F59E0B',
+          time: 'Hace 2 min'
+        },
+        {
+          author: 'Camila y Mateo · Medellín',
+          text: 'Por una Navidad llena de alegría, abrazos sinceros y celebraciones seguras para todos los niños.',
+          color: '#E11D48',
+          time: 'Hace 5 min'
+        },
+        {
+          author: 'Doña Martha · Cali',
+          text: 'Agradecida por un año más junto a mis nietos prendiendo velitas en el andén con alegría.',
+          color: '#0284C7',
+          time: 'Hace 9 min'
+        },
+        {
+          author: 'Andrés G. · Barranquilla',
+          text: 'Que este nuevo año traiga prosperidad, paz y muchos proyectos cumplidos para toda Colombia.',
+          color: '#FFFBEB',
+          time: 'Hace 14 min'
+        }
+      ];
+
+      let selectedCandleColor = '#F59E0B';
+      const colorButtons = document.querySelectorAll('.color-choice');
+      colorButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          colorButtons.forEach(b => b.classList.remove('ring-2', 'ring-white'));
+          btn.classList.add('ring-2', 'ring-white');
+          selectedCandleColor = btn.getAttribute('data-color');
+        });
+      });
+
+      const candlesWall = document.getElementById('candles-wall');
+      const candlesCountEl = document.getElementById('candles-count');
+
+      function renderCandles() {
+        candlesWall.innerHTML = '';
+        candlesCountEl.textContent = initialWishes.length;
+
+        initialWishes.forEach((wish, index) => {
+          const card = document.createElement('div');
+          card.className = 'glass-card rounded-2xl p-4 border border-amber-300/25 flex items-start gap-3.5 transition hover:bg-white/10';
+          card.innerHTML = `
+            <div class="shrink-0 pt-1">
+              <svg viewBox="0 0 36 64" class="w-8 h-14 drop-shadow-[0_0_10px_rgba(252,211,77,0.65)]">
+                <!-- Llama -->
+                <path class="candle-flame" style="animation-delay: ${index * 0.25}s" d="M18 4 C24 14, 24 22, 18 25 C12 22, 12 14, 18 4 Z" fill="#FCD34D" />
+                <path class="candle-flame" style="animation-delay: ${index * 0.25}s" d="M18 10 C21 15, 21 20, 18 22 C15 20, 15 15, 18 10 Z" fill="#FFFBEB" />
+                <!-- Pabilo -->
+                <rect x="17" y="24" width="2" height="4" fill="#1E293B" />
+                <!-- Cuerpo de la vela -->
+                <rect x="11" y="28" width="14" height="32" rx="3" fill="${wish.color}" stroke="rgba(255,255,255,0.45)" stroke-width="1" />
+              </svg>
+            </div>
+            <div class="space-y-1 flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-display font-bold text-xs text-amber-300 truncate">${escapeHTML(wish.author)}</span>
+                <span class="text-[10px] text-amber-100/50 shrink-0">${wish.time}</span>
+              </div>
+              <p class="text-xs text-amber-50/90 leading-relaxed break-words">
+                "${escapeHTML(wish.text)}"
+              </p>
+            </div>
+          `;
+          candlesWall.appendChild(card);
+        });
+      }
+
+      function escapeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      renderCandles();
+
+      const candleForm = document.getElementById('candle-form');
+      candleForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const authorInput = document.getElementById('wish-author');
+        const textInput = document.getElementById('wish-text');
+
+        const author = authorInput.value.trim();
+        const text = textInput.value.trim();
+        if (!author || !text) return;
+
+        initialWishes.unshift({
+          author,
+          text,
+          color: selectedCandleColor,
+          time: '¡Recién encendida!'
+        });
+
+        playCandleChimeSound();
+        renderCandles();
+        authorInput.value = '';
+        textInput.value = '';
+      });
+
+      /* =====================================================================
+         7. CONFIGURADOR DE COMPRA Y MODAL DE CONFIRMACIÓN
+      ===================================================================== */
+      let selectedChannel = 'Rappi Turbo (Entrega en ~15 min)';
+      let selectedPrice = 4500;
+      let selectedPackTitle = 'Bon Yurt Velitas Individual (165 g)';
+      let quantity = 1;
+
+      const channelRappi = document.getElementById('channel-rappi');
+      const channelTienda = document.getElementById('channel-tienda');
+      const packSingle = document.getElementById('pack-single');
+      const packFour = document.getElementById('pack-four');
+      const qtyMinus = document.getElementById('qty-minus');
+      const qtyPlus = document.getElementById('qty-plus');
+      const qtyValue = document.getElementById('qty-value');
+      const orderTotal = document.getElementById('order-total');
+
+      function formatCOP(amount) {
+        return '$' + amount.toLocaleString('es-CO') + ' COP';
+      }
+
+      function updateOrderTotal() {
+        qtyValue.textContent = quantity;
+        orderTotal.textContent = formatCOP(selectedPrice * quantity);
+      }
+
+      channelRappi.addEventListener('click', () => {
+        selectedChannel = 'Rappi Turbo (Entrega en ~15 min)';
+        channelRappi.className = 'channel-btn active p-3.5 rounded-2xl border-2 border-orange-400 bg-orange-500/20 text-left transition';
+        channelTienda.className = 'channel-btn p-3.5 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10 text-left transition';
+      });
+
+      channelTienda.addEventListener('click', () => {
+        selectedChannel = 'Tienda de Barrio más cercana (Recogida inmediata)';
+        channelTienda.className = 'channel-btn active p-3.5 rounded-2xl border-2 border-amber-400 bg-amber-500/20 text-left transition';
+        channelRappi.className = 'channel-btn p-3.5 rounded-2xl border border-white/20 bg-white/5 hover:bg-white/10 text-left transition';
+      });
+
+      packSingle.addEventListener('click', () => {
+        selectedPrice = Number(packSingle.dataset.price);
+        selectedPackTitle = packSingle.dataset.title;
+        packSingle.className = 'pack-btn active p-3.5 rounded-xl border-2 border-amber-400 bg-amber-400/15 text-left transition';
+        packFour.className = 'pack-btn p-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-left transition';
+        updateOrderTotal();
+      });
+
+      packFour.addEventListener('click', () => {
+        selectedPrice = Number(packFour.dataset.price);
+        selectedPackTitle = packFour.dataset.title;
+        packFour.className = 'pack-btn active p-3.5 rounded-xl border-2 border-amber-400 bg-amber-400/15 text-left transition';
+        packSingle.className = 'pack-btn p-3.5 rounded-xl border border-white/20 bg-white/5 hover:bg-white/10 text-left transition';
+        updateOrderTotal();
+      });
+
+      qtyMinus.addEventListener('click', () => {
+        if (quantity > 1) {
+          quantity--;
+          updateOrderTotal();
+        }
+      });
+
+      qtyPlus.addEventListener('click', () => {
+        if (quantity < 20) {
+          quantity++;
+          updateOrderTotal();
+        }
+      });
+
+      // Modal de confirmación
+      const confirmOrderBtn = document.getElementById('confirm-order-btn');
+      const orderModal = document.getElementById('order-modal');
+      const modalSummary = document.getElementById('modal-summary');
+      const modalCode = document.getElementById('modal-code');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+
+      confirmOrderBtn.addEventListener('click', () => {
+        playCandleChimeSound();
+        const totalFormatted = formatCOP(selectedPrice * quantity);
+        const randomCode = 'ALPINA-' + Math.floor(1000 + Math.random() * 9000);
+        modalSummary.innerHTML = `Has seleccionado <strong>${quantity}x ${selectedPackTitle}</strong> por un total de <strong class="text-amber-300">${totalFormatted}</strong> mediante <strong>${selectedChannel}</strong>.`;
+        modalCode.textContent = randomCode;
+        orderModal.classList.remove('hidden');
+        orderModal.classList.add('flex');
+      });
+
+      closeModalBtn.addEventListener('click', () => {
+        orderModal.classList.add('hidden');
+        orderModal.classList.remove('flex');
+      });
+    });
+  </script>
+</body>
+</html>
